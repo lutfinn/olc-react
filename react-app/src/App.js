@@ -5,7 +5,7 @@ function App() {
   const [count, setCount] = useState(0)
   const handleTambah = () => setCount(count + 1)
   const handleKurang = () => setCount(count - 1)
-  
+
   return (
     <div className="App">
       <button onClick={handleTambah}>Tambah</button>
