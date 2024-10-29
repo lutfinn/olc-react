@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
 
-function Counter() {
+function Counter({getData}) {
+  const [items, setItems] = useState([])
+  useEffect(() => {
+    console.log(`Sedang didalam useEffect. Number=${getData} `)
+    setItems(getData)
+  }, [getData])
+
+  return (
+    <div className="App">
+      {items.map(item => (
+        <h1>{item}</h1>
+      ))}
+    </div>
+  );
+}
+
+function App() {
   const [count, setCount] = useState(0)
   const [color, setColor] = useState('salmon')
   const handleTambah = () => setCount(count + 1)
@@ -11,28 +27,17 @@ function Counter() {
     setColor(nextColor)
   }
 
-  useEffect(() => {
-    console.log(`Sedang didalam useEffect. Count = ${count}`)
-
-    return () => {
-      console.log(`Tugasku membersihkan semuanya`)
-    }
-  }, [count])
+  const getData = () => {
+    return [count, count + 1, count + 2]
+  }
 
   return (
-    <div className="App">
+    <div style={{color}}>
       <button onClick={handleTambah}>Tambah</button>
       <button onClick={handleWarna}>Warna</button>
       <button onClick={handleKurang}>Kurang</button>
-      <h1 style={{ color }}>{count}</h1>
-    </div>
-  );
-}
 
-function App() {
-  return (
-    <div>
-      <Counter />
+      <Counter getData={getData}/>
     </div>
   )
 }
