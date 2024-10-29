@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { createContext, useState } from 'react'
 import './App.css';
+import ContextComponent from  './ContextComponent';
+
+export const ThemeContext = createContext()
 
 function App() {
-  const [count, setCount] = useState(0)
-  const handleTambah = () => setCount(count + 1)
-  const handleKurang = () => setCount(count - 1)
+  const [darkTheme, setDarkTheme] = useState(false)
+
+  const handleToggleTheme = () => {
+    setDarkTheme(!darkTheme)
+  }
 
   return (
-    <div className="App">
-      <button onClick={handleTambah}>Tambah</button>
-      <button onClick={handleKurang}>Kurang</button>
-      
-      <h1>{count}</h1>
-    </div>
+    <ThemeContext.Provider value={darkTheme}>
+      <div className="App">
+        <button onClick={handleToggleTheme}>Change Theme</button>
+
+        <ContextComponent />
+      </div>
+    </ThemeContext.Provider>
+
   );
 }
 
