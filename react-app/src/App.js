@@ -5,14 +5,14 @@ import ContextComponent from  './ContextComponent';
 export const ThemeContext = createContext()
 
 function App() {
-  const [darkTheme, setDarkTheme] = useState(false)
+  const [theme, setTheme] = useState('light')
 
   const handleToggleTheme = () => {
-    setDarkTheme(!darkTheme)
+    setTheme(theme === 'light' ? 'dark' : 'light')
   }
 
   return (
-    <ThemeContext.Provider value={darkTheme}>
+    <ThemeContext.Provider value={theme}>
       <div className="App">
         <button onClick={handleToggleTheme}>Change Theme</button>
 
